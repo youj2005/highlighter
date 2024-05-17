@@ -1,0 +1,680 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>CS 1332 - Data Structures and Algorithms</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-transparentGray { background-color: rgba(227, 226, 224, 0); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="18554e15-a7b4-4288-97a2-e965eb657b9f" class="page sans"><header><h1 class="page-title">CS 1332 - Data Structures and Algorithms</h1><p class="page-description"></p></header><div class="page-body"><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0"><strong>Big-O</strong></summary><div class="indented"><ul id="4b97bcb4-295f-4c84-991b-a2569cf72391" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Amortized Efficiency</mark><ul id="fd4841f4-0009-4410-a18e-95a956c024ef" class="bulleted-list"><li style="list-style-type:circle">Considers <mark class="highlight-yellow_background">average Big-O</mark> instead of simply worst-case scenario</li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Array</summary><div class="indented"><ul id="c1482f8e-80b7-4ab0-8625-c497f3e7acd7" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Array</mark><mark class="highlight-default"> - A </mark><mark class="highlight-yellow_background">contiguous sequenced collection of items</mark><mark class="highlight-default"> (with indexes) of </mark><mark class="highlight-yellow_background">fixed length </mark><mark class="highlight-default">(capacity)</mark><ul id="b0c1a7e4-685e-4427-bea7-09bef8fcb37e" class="bulleted-list"><li style="list-style-type:circle">Stores primitives or objects</li></ul><ul id="16e8c371-25a5-45b3-bdc6-52ba7f32b218" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Statically allocated</mark> (fixed memory spots)</li></ul></li></ul><ul id="572cae02-7fa9-4cea-bd13-ee6587138009" class="bulleted-list"><li style="list-style-type:disc">Declaration<ul id="88db1a51-f2f5-4646-b347-498ac9552bd8" class="bulleted-list"><li style="list-style-type:circle"><code><span style="border-bottom:0.05em solid">obj</span></code><code>[] </code><code><span style="border-bottom:0.05em solid">arr</span></code><code> = new </code><code><span style="border-bottom:0.05em solid">obj</span></code><code>[</code><code><span style="border-bottom:0.05em solid">length</span></code><code>];</code></li></ul><ul id="2764b563-68e5-4066-aeca-9ab2baca2970" class="bulleted-list"><li style="list-style-type:circle"><code><span style="border-bottom:0.05em solid">obj</span></code><code>[] </code><code><span style="border-bottom:0.05em solid">arr</span></code><code> = {</code><code><span style="border-bottom:0.05em solid">item1</span></code><code>, … };</code></li></ul></li></ul><ul id="87125c04-e716-4b6e-be9c-4612f92800a7" class="bulleted-list"><li style="list-style-type:disc">Arrays can store references to objects</li></ul><ul id="c2131125-5642-441d-9d26-4ca8533efcf7" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Accessing O(1)</mark><ul id="40fc467c-ed6c-4f3e-8000-a9d4c33aff40" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Memory storage is contiguous</mark> (adjacent memory positions)</li></ul><ul id="3ae9344c-9ad3-47cb-92f0-1918d209cd89" class="bulleted-list"><li style="list-style-type:circle">First index memory location is known</li></ul><ul id="79d67e37-b302-444f-95da-39025e76322b" class="bulleted-list"><li style="list-style-type:circle">Data type is predetermined</li></ul><ul id="8385e56d-ca50-4cae-a09d-bcf89938224e" class="bulleted-list"><li style="list-style-type:circle"><code>new_address = start_address + i * data_size</code></li></ul></li></ul><ul id="35273cce-f50a-4e02-8654-d8d09dd65253" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Searching O(N)</mark><ul id="2dc4514d-44a7-4d4e-a312-bba3139efc70" class="bulleted-list"><li style="list-style-type:circle">Linear search for unsorted array</li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">ArrayLists</summary><div class="indented"><ul id="d31a5dbe-fd2c-445e-8f99-bd122e9461ee" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">ArrayList</mark> - <mark class="highlight-yellow_background">A contiguous sequenced collection of items of variable length</mark><ul id="3926de5a-21f7-4359-84b7-8504225a933b" class="bulleted-list"><li style="list-style-type:circle">Must be <mark class="highlight-yellow_background">zero-aligned</mark><ul id="8b62cebd-4a12-488b-a5d3-70e0968e2098" class="bulleted-list"><li style="list-style-type:square">First item must be in first memory location</li></ul></li></ul></li></ul><ul id="0ce9497c-815b-4883-b38d-dc530e3162c5" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Adding</mark><ul id="dfaacddb-d53f-4022-bd51-58aa6a289b73" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">At index O(N)</mark><ul id="96fb9b25-7a82-4701-a898-571fce0af629" class="bulleted-list"><li style="list-style-type:square">Must shift items afterwards backwards by one</li></ul></li></ul><ul id="d4b0713c-fbd3-4dbe-8385-4f8149f687eb" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">At end O(1) (amortized)</mark><ul id="35295611-76c4-4119-8b3a-eeda47384d66" class="bulleted-list"><li style="list-style-type:square">Because no shifting</li></ul><ul id="191870fc-565d-40a8-a28a-0a94cb37d2f4" class="bulleted-list"><li style="list-style-type:square">Non-amortized: O(N) because of resizing</li></ul></li></ul></li></ul><ul id="cf74455d-f6ce-463b-815c-13d1696cb0e9" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Remove</mark><ul id="723c46e4-784c-4a7e-824f-d0d1e6ae57ad" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">At index O(N)</mark><ul id="bfc1f9f0-4b10-4121-9af7-d2924cc89145" class="bulleted-list"><li style="list-style-type:square">Must shift items afterwards forward by one</li></ul></li></ul><ul id="43a6405f-9c2a-477c-84f9-ef8393c291ba" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">At end O(1)</mark><ul id="39251b3f-95b2-4472-9acd-ba18f14004a0" class="bulleted-list"><li style="list-style-type:square">No shifting</li></ul></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">LinkedLists (LLs)</summary><div class="indented"><ul id="1c8b727c-bf31-48ad-843f-ef9413aff945" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Linked List (LL)</mark> - <mark class="highlight-yellow_background">A collection of nodes, each of which only connects to one other node (next), starting at the head</mark><ul id="5a7f9e77-fda1-4a8b-bcb7-20dbe88bec63" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Doubly Linked Lists (DLL)</mark> - <mark class="highlight-yellow_background">A LinkedList with pointer to the next </mark><mark class="highlight-yellow_background"><span style="border-bottom:0.05em solid">and previous</span></mark><mark class="highlight-yellow_background"> nodes</mark></li></ul><ul id="828ea285-86a7-433b-97ae-51e3fcd5e4ff" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Singly Linked Lists (SLL)</mark> - <mark class="highlight-yellow_background">A typical LinkedList with only the next pointer</mark></li></ul><ul id="0ea9c08b-d9fa-40f1-92db-cf57fccc436c" class="bulleted-list"><li style="list-style-type:circle">Circularly Linked Lists (CLL) - A LinkedList where the head and the “tail” are the same<ul id="ddd4ab32-a7b7-4c70-8fbd-7bf48b4adc92" class="bulleted-list"><li style="list-style-type:square">End-condition is now when <code>current == head</code></li></ul></li></ul><ul id="1125265d-f323-4fd8-9559-753f3db4efdf" class="bulleted-list"><li style="list-style-type:circle">Not necessarily contiguous</li></ul><ul id="f4ab6062-fa34-4ccb-aa41-11583c2c968b" class="bulleted-list"><li style="list-style-type:circle">Check if head is null</li></ul><ul id="b3663983-df8c-4ad5-8ed8-467073bb325b" class="bulleted-list"><li style="list-style-type:circle">Can contain tail pointer</li></ul></li></ul><ul id="6fe522f0-4aac-44a5-a95b-64560a63e633" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Node</mark><mark class="highlight-default"> - </mark><mark class="highlight-yellow_background">Stores data and a reference to the next node</mark></li></ul><ul id="e382b9ed-eb71-442a-9245-bdde8450d151" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Adding</mark><ul id="8c6099fe-bb24-49fb-a373-bade8b399e76" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">At index O(N)</mark></li></ul><ul id="92d09cfa-18e0-4946-a6e7-865036a42863" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">At front O(1)</mark><ul id="69059707-cfe3-4a97-a962-c95e186319ed" class="bulleted-list"><li style="list-style-type:square">Must reset head</li></ul></li></ul><ul id="f96b0023-d954-452a-950b-be0739786d5a" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">At end O(N)</mark><ul id="20b431d2-cd9d-4c57-9e28-6dc669038f99" class="bulleted-list"><li style="list-style-type:square">Must stop two nodes ahead</li></ul><ul id="a7e7a659-9c1e-4b28-9f2a-4ab09bccb3b3" class="bulleted-list"><li style="list-style-type:square">Unless if end pointer exists (O(1))</li></ul></li></ul></li></ul><ul id="82df03b5-9697-4078-ac86-76031f4e9c49" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Removing</mark><ul id="a1d7178b-2662-4f90-ade7-bb3fada4ff4a" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">At index O(N)</mark></li></ul><ul id="cfa69cf4-239e-4a63-a883-67615d345ab3" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">At front O(1)</mark></li></ul><ul id="64cf137b-7b3d-4e83-a9dd-eda2c3418acc" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">At end O(N)</mark><ul id="eca09c04-553b-409f-8484-dc628faa26c4" class="bulleted-list"><li style="list-style-type:square">Must check next next node</li></ul></li></ul></li></ul><ul id="540f55a8-5ec4-4ecd-ba31-92a9df3e1aa4" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Edge Cases</mark><ul id="f633dc62-8b6f-41d5-8499-cff05a9d0940" class="bulleted-list"><li style="list-style-type:circle">Adding to back of empty SLL (create new node as header)</li></ul><ul id="3b3b4379-17bf-49d4-8802-3137f297de34" class="bulleted-list"><li style="list-style-type:circle">Removing back of SLL with size 1 (head = null)</li></ul></li></ul><ul id="e18f373b-2c4b-4740-8c1a-d57633d61233" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Iterable/Iterator</mark><ul id="fff88be4-fd08-4832-bc66-c8222dc6f04b" class="bulleted-list"><li style="list-style-type:circle">Easily implements iterator by calling next for next()</li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Stacks</summary><div class="indented"><ul id="13b3d3d3-9cae-4784-8952-cd5b57dbc929" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Stack</mark> - <mark class="highlight-yellow_background">A data structure to remove the most recently added object</mark> (<mark class="highlight-teal_background">Last in First Out (LIFO)</mark>)<figure id="2b39c99a-914e-412f-8798-3fb16b2775d1" class="image"><a href="CS%201332%20-%20Data%20Structures%20and%20Algorithms%2018554e15a7b4428897a2e965eb657b9f/Untitled.png"><img style="width:336px" src="CS%201332%20-%20Data%20Structures%20and%20Algorithms%2018554e15a7b4428897a2e965eb657b9f/Untitled.png"/></a></figure><ul id="2b5d49e7-1f6c-4dba-9a85-ef5547d4aac9" class="bulleted-list"><li style="list-style-type:circle">Example behaviors<ul id="e90eed31-1d5a-4a7d-8033-64e841074e57" class="bulleted-list"><li style="list-style-type:square">Undo/redo</li></ul><ul id="5d38f6a8-10f1-4901-8987-2daa7dabb0d7" class="bulleted-list"><li style="list-style-type:square">Browser forward/backward</li></ul><ul id="dfbc0551-4cff-4e42-b1ac-be8da5301919" class="bulleted-list"><li style="list-style-type:square">Recursive method (call stack)</li></ul></li></ul></li></ul><ul id="79795b8b-27d0-4135-a9d7-ef1204dbe483" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Push</mark> - <mark class="highlight-yellow_background">Adding to the top of the stack</mark></li></ul><ul id="8eaa7eff-4347-4a18-ad38-f0ed36d0d3ca" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Pop</mark> - <mark class="highlight-yellow_background">Removing from the top of the stack</mark></li></ul><ul id="392e4de9-bba7-484d-80e0-083f0c07c979" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Peek</mark> - <mark class="highlight-yellow_background">Looks at top object without removing</mark></li></ul><ul id="cd94092b-3492-4b6d-bccb-8a10add49035" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-default">Implementations</mark><ul id="dd08e037-cd9a-4333-8a56-b7f402627870" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Linked Stack</mark> - <mark class="highlight-yellow_background">Singly LinkedList with the head being the most recent element</mark></li></ul><ul id="c1c7fb6b-108c-40c9-96f2-ecb44ec6b5b5" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Array Stack</mark> - <mark class="highlight-yellow_background">ArrayList starting at the end with most recent element as the last element</mark></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Queues</summary><div class="indented"><ul id="affb7232-0b89-4365-aebc-657cb366b107" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Queue</mark> - <mark class="highlight-yellow_background">A data structure to remove the oldest object</mark> <mark class="highlight-teal_background">(First in First Out (FIFO))</mark><figure id="8fd01660-52ab-4949-b880-5dfe9f7e0aad" class="image"><a href="CS%201332%20-%20Data%20Structures%20and%20Algorithms%2018554e15a7b4428897a2e965eb657b9f/Screenshot_2024-01-31_at_12.26.42_AM.png"><img style="width:528px" src="CS%201332%20-%20Data%20Structures%20and%20Algorithms%2018554e15a7b4428897a2e965eb657b9f/Screenshot_2024-01-31_at_12.26.42_AM.png"/></a></figure><ul id="c96826cd-16d4-40ea-b2af-1c5af04124fc" class="bulleted-list"><li style="list-style-type:circle">Example Behaviors<ul id="97fe266d-06fa-480b-a323-9a19104746e0" class="bulleted-list"><li style="list-style-type:square">Song queue</li></ul><ul id="871ff1cd-b58c-4120-9135-7b7dbb835d57" class="bulleted-list"><li style="list-style-type:square">Waitlist</li></ul></li></ul></li></ul><ul id="daf1d2fe-a1dc-45f8-9f3b-993621265b18" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Enqueue</mark> - <mark class="highlight-yellow_background">Adds to end of the queue</mark></li></ul><ul id="dc4c7dc5-868a-4ae3-b9d8-b2386cdf57b5" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Dequeue</mark> - <mark class="highlight-yellow_background">Removes the oldest in the queue (front)</mark></li></ul><ul id="15168b3d-8cc1-4fdb-a63c-068e6ad6d857" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Peek</mark> - <mark class="highlight-yellow_background">Returns front of queue without removing</mark></li></ul><ul id="8adaf8b1-a5cd-441b-b21e-880114f5a8b3" class="bulleted-list"><li style="list-style-type:disc">Implementation<ul id="5b804c1f-6133-4ba6-a66e-8d40b5d8e423" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Linked Queue</mark> - <mark class="highlight-yellow_background">Singly LinkedList where head is the front of the queue</mark><ul id="54adfb83-882c-4d18-9153-c6f1268fe35d" class="bulleted-list"><li style="list-style-type:square">Enqueue → Add to tail</li></ul><ul id="d9da47ad-a236-4755-8e09-baa5182ecbd7" class="bulleted-list"><li style="list-style-type:square">Dequeue → Remove head</li></ul></li></ul><ul id="16e37ccd-de55-43c5-97b0-2719dac6edc5" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Array Queue</mark> - <mark class="highlight-yellow_background">Array with front and back indexes to keep track</mark><ul id="24c5ecc8-48ba-4ffe-a466-66071fa5b770" class="bulleted-list"><li style="list-style-type:square">Not ArrayList because both add and remove at beginning is O(N)</li></ul><ul id="7c5a9285-3ebf-41ba-ab28-b81e36f0ec96" class="bulleted-list"><li style="list-style-type:square">Front and back both start at start of array<ul id="b3464d4b-1fb8-4369-9b0d-c6325a5ce369" class="bulleted-list"><li style="list-style-type:disc">Back wraps around to front when back reaches the end</li></ul></li></ul><ul id="c1d37475-0f11-43b6-b246-a2210e78c98e" class="bulleted-list"><li style="list-style-type:square">Dequeue → increment first</li></ul><ul id="f786ac8e-a1d5-4ad9-8985-be4ab85ce911" class="bulleted-list"><li style="list-style-type:square">Enqueue → increment last</li></ul></li></ul></li></ul><ul id="799ad7e2-acc2-4199-890e-60e5dc8c69a7" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Priority Queue</mark> - <mark class="highlight-yellow_background">A data structure where the element with highest priority is removed</mark><ul id="7f23c494-5cda-4d0d-88ca-e1a187cd922c" class="bulleted-list"><li style="list-style-type:circle">Data must be comparable</li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Deques</summary><div class="indented"><ul id="0ae4b714-81c0-4178-974d-23226b604529" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Deque</mark> - <mark class="highlight-yellow_background">A double-ended queue with add/remove from front/back</mark></li></ul><ul id="8b1fe7b6-bb4e-4ebe-b9c3-a16c914c4621" class="bulleted-list"><li style="list-style-type:disc">Implementation<ul id="ad60adf3-9765-4551-93c4-497ed0619285" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Array Deque</mark><ul id="e87131c6-5e56-47a5-a596-1c13a2805a2a" class="bulleted-list"><li style="list-style-type:square">Same methods as Array Queue with addLast and removeFirst</li></ul><ul id="801d90fb-209d-443d-9827-82fa957dd2b6" class="bulleted-list"><li style="list-style-type:square">Same wrap-around behavior</li></ul><ul id="f874d93c-e013-4225-8af1-6d1cafb25294" class="bulleted-list"><li style="list-style-type:square">addFirst → decrement first</li></ul><ul id="1cf9c017-811a-4423-bcd6-5cb91491f197" class="bulleted-list"><li style="list-style-type:square">removeLast → decrement last</li></ul></li></ul><ul id="b2352771-3d78-45c6-a860-86641f761447" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Linked Deque</mark> - <mark class="highlight-yellow_background">Doubly LinkedList</mark><ul id="f632af01-dbaf-404d-82ec-cb8efc83c61f" class="bulleted-list"><li style="list-style-type:square">Same methods as Linked Queue</li></ul><ul id="39ef70aa-1be9-4c19-aec6-7ffe033b3ebb" class="bulleted-list"><li style="list-style-type:square">addFirst → New head</li></ul><ul id="d870b5b7-8bb4-4bfa-bba3-13afb53d3f73" class="bulleted-list"><li style="list-style-type:square">removeLast → Doubly linked list so remove tail (O(N))</li></ul></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Trees</summary><div class="indented"><ul id="e0fab132-21f8-4d4b-a519-68e5b66ef105" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Tree</mark> - <mark class="highlight-yellow_background">A linked hierarchical structure</mark><figure id="7d9f756b-a8e9-45a6-a77a-44691f52e83f" class="image"><a href="CS%201332%20-%20Data%20Structures%20and%20Algorithms%2018554e15a7b4428897a2e965eb657b9f/Screenshot_2024-01-31_at_12.45.09_AM.png"><img style="width:432px" src="CS%201332%20-%20Data%20Structures%20and%20Algorithms%2018554e15a7b4428897a2e965eb657b9f/Screenshot_2024-01-31_at_12.45.09_AM.png"/></a></figure><ul id="e012c5e3-b578-493f-96ec-3fc743402784" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Depth</mark> - <mark class="highlight-yellow_background">Distance from the node to the root</mark></li></ul><ul id="ff0db9cf-e663-40d5-92d5-1538be0ec5e6" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Height</mark> - <mark class="highlight-yellow_background">Distance from the node to the deepest sub-node</mark></li></ul><ul id="d83e756a-7a44-4a3a-b6ca-ace61fe17deb" class="bulleted-list"><li style="list-style-type:circle">No cycles</li></ul></li></ul><ul id="3fa38194-7328-4e82-8a5c-21db0d0e61bd" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Depth First Search (DFS)</mark> - <mark class="highlight-yellow_background">Starts at root and traverses by going for deepest node</mark><ul id="81bce883-49aa-4db3-b9aa-0c108d987dff" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Preorder Traversal</mark> - <mark class="highlight-yellow_background">Check current data </mark><strong><mark class="highlight-yellow_background">first </mark></strong><mark class="highlight-yellow_background">then recursively traverses through left child then right</mark><ul id="e1e96e33-4c83-4016-931b-35f5a04e5653" class="bulleted-list"><li style="list-style-type:square">Records top levels first</li></ul></li></ul><ul id="be429fa4-1769-4188-bc7a-1f62a6d61a3f" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Postorder Traversal</mark> - <mark class="highlight-yellow_background">Check current data </mark><strong><mark class="highlight-yellow_background">after</mark></strong><mark class="highlight-yellow_background"> recursively traversing through left child then right</mark><ul id="857ca105-23cf-4d40-838f-eabe046b4561" class="bulleted-list"><li style="list-style-type:square">Records bottom levels first</li></ul></li></ul><ul id="98cfda1b-66b1-43e0-aa09-5d594460ccce" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Inorder Traversal</mark> - <mark class="highlight-yellow_background">Check current data </mark><strong><mark class="highlight-yellow_background">between</mark></strong><mark class="highlight-yellow_background"> recursively traversing through left child and right</mark><ul id="2430c380-158c-4544-bb20-6700b83bbcbb" class="bulleted-list"><li style="list-style-type:square">Reads data in order</li></ul><ul id="5d5cf882-f8d5-4a20-8b67-e9ef92a78cbb" class="bulleted-list"><li style="list-style-type:square">Not unique representation unlike pre and post</li></ul></li></ul></li></ul><ul id="0bae87c7-daef-4aa2-ba11-271ca540e37a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Breadth First Search (BFS)</mark> - <mark class="highlight-yellow_background">Starts at root and traverses by searching across each depth</mark><ul id="4a98346b-90fe-4b9b-83bc-d40471e1f6ff" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Levelorder Traversal</mark> - <mark class="highlight-yellow_background">Add to a queue the root and then start looking at nodes from the front of the queue, enqueue their children, and then dequeue</mark></li></ul></li></ul><ul id="9c0c9dbd-ebca-4114-a192-95dc7b16591f" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Binary Tree</mark> - <mark class="highlight-yellow_background">A tree where each node has only two children </mark>(<mark class="highlight-teal_background">left then right</mark>)<ul id="b61eee24-4534-451b-a40c-287c950de888" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Balanced</mark> - <mark class="highlight-yellow_background">If each kids heights differ by at most 1</mark></li></ul><ul id="bbcadfe2-5ab1-4da1-b6ca-475e6037f321" class="bulleted-list"><li style="list-style-type:circle">Ability to recursively traverse by going to children</li></ul><ul id="e7e3d8e2-7a44-4b69-9e66-fb2b5ec3b93b" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Binary Tree shapes</mark><figure id="e46a673d-cbdc-4a6c-ae36-a0b54fc2936e" class="image"><a href="CS%201332%20-%20Data%20Structures%20and%20Algorithms%2018554e15a7b4428897a2e965eb657b9f/Screenshot_2024-01-31_at_12.55.16_AM.png"><img style="width:1080px" src="CS%201332%20-%20Data%20Structures%20and%20Algorithms%2018554e15a7b4428897a2e965eb657b9f/Screenshot_2024-01-31_at_12.55.16_AM.png"/></a></figure></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Binary Search Trees</summary><div class="indented"><ul id="f6e66415-259e-4774-be68-2a4a76bca06d" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Binary Search Tree</mark> - <mark class="highlight-yellow_background">A tree where the left child is less than the node and the right is greater</mark></li></ul><ul id="e02a97f9-779a-45c4-9231-a1ebdf2c48d5" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Binary Search O(logn)</mark><ul id="a22ef9d8-7a4b-4f99-910a-e1eea7c88efb" class="bulleted-list"><li style="list-style-type:circle">Implements a form of binary search but recursive<ul id="0b9ed4f9-d1fc-4e10-a48d-8778b5433974" class="bulleted-list"><li style="list-style-type:square">Depending on whether or not search number is larger/smaller than current node</li></ul><ul id="c58ea79f-0ada-4d5b-8b10-f81863242bd6" class="bulleted-list"><li style="list-style-type:square">Go to corresponding child</li></ul></li></ul><ul id="7f3490c4-076e-4384-a483-8c132a7bfca9" class="bulleted-list"><li style="list-style-type:circle">True/False</li></ul><ul id="ae528f88-597d-4398-bb39-c030727b2614" class="bulleted-list"><li style="list-style-type:circle">Degenerate trees have O(n) </li></ul></li></ul><ul id="6748dbb5-b491-4f34-b929-d34f38040d3a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Pointer Reinforcement</mark> - <mark class="highlight-yellow_background">When recursively calling methods, set left/right to whatever the previous returns (always returns current node at end)</mark><ul id="f6cdf212-1436-42b9-9818-6641a85dc575" class="bulleted-list"><li style="list-style-type:circle">Add<ul id="be00e6f6-b259-4d3d-8894-8d7fb3d6b362" class="bulleted-list"><li style="list-style-type:square">Create new node if current is add</li></ul></li></ul><ul id="9d6f8e96-711d-4823-89ba-a6fc3628dceb" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Remove</mark><ul id="67ae146d-ca83-4a08-b7e8-2e8cd4ca38a4" class="bulleted-list"><li style="list-style-type:square">Use dummy node to store removed data, which at each step is the current data</li></ul><ul id="179e3716-b3dd-4e24-a772-845fd3308b2a" class="bulleted-list"><li style="list-style-type:square">Zero-Child Case<ul id="0e15f094-8b3f-4589-b1c4-50bac130dd65" class="bulleted-list"><li style="list-style-type:disc">Return/set null</li></ul></li></ul><ul id="dbebbb1c-bc46-4457-8dc7-ccd3d86073e4" class="bulleted-list"><li style="list-style-type:square">One-Child Case<ul id="baed838d-0e30-44ad-b2c8-7d2589ed62fe" class="bulleted-list"><li style="list-style-type:disc">Return/set left/right child</li></ul></li></ul><ul id="387fbc3c-d29a-4a16-99a3-203f25567bbd" class="bulleted-list"><li style="list-style-type:square">Two-Child Case<ul id="433724f1-bb05-4d11-b0ee-52e60cfb7fa8" class="bulleted-list"><li style="list-style-type:disc">Change current node to have the data of successor/predecessor<ul id="df6117f7-2778-410e-8d90-e328aa0ff3bf" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Successor</mark> - <mark class="highlight-yellow_background">Least number greater than current node (leftmost leaf in right child)</mark></li></ul><ul id="dbb3ff07-5fe5-4d7a-a1e6-514390a73aa2" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Predecessor</mark> - <mark class="highlight-yellow_background">Largest number less than current node (rightmost leaf in left child0</mark></li></ul><ul id="9e5e0f19-2cd0-4f91-ae79-9c5a47f6441d" class="bulleted-list"><li style="list-style-type:circle">Run helper method to get data of successor/predecessor<ul id="879c2195-c167-441d-9ab8-e79066409753" class="bulleted-list"><li style="list-style-type:square">Helper is also pointer reinforced by returning the child of the succ/pred</li></ul></li></ul><ul id="9fb2f27f-deb5-4bce-a66d-2735c7b058ec" class="bulleted-list"><li style="list-style-type:circle">Use dummy node to pass through helper and use the data from that (succ/pred) to change current data</li></ul></li></ul></li></ul></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Heap</summary><div class="indented"><ul id="ce45dffa-1e36-4f3c-a885-7b9e502a621f" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Heap</mark> - <mark class="highlight-yellow_background">A complete binary tree where each parent has a higher priority than its children</mark><ul id="db393c75-10ff-4967-8f4d-ce24d24840e5" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">MaxHeap</mark> - A heap where <mark class="highlight-yellow_background">parent &gt; kids</mark></li></ul><ul id="99e43784-e435-49f5-a1ad-27f369426434" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">MinHeap</mark> - A heap where <mark class="highlight-yellow_background">parent &lt; kids</mark></li></ul></li></ul><ul id="c12b1fb8-8833-41c8-81ea-de8201b0485e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">ArrayHeap</mark><mark class="highlight-default"> - </mark><mark class="highlight-yellow_background">Level order array, starting at index 1</mark><ul id="57bea1d7-bdef-4cc6-bc17-6e6964117e86" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">For node at i</mark><ul id="da6bdb23-03e6-4925-a4fc-e0576d548b74" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Left child: 2i</mark></li></ul><ul id="3fe70d0d-f1e6-45d3-83a6-68f71343a1eb" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Right child: 2i+1</mark></li></ul><ul id="d0b6132a-4b87-47bb-9fe5-4f95d3751fd7" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Parent: i/2</mark></li></ul></li></ul></li></ul><ul id="4deeb069-404c-4c45-8e9d-2b9098d3cf7a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Heapify</mark> - <mark class="highlight-yellow_background">Ensuring heap structure of complete heap represented by array by repeatedly swapping a node and its parent to maintain its relationship</mark></li></ul><ul id="0ec15a24-fd7c-444d-b237-975619aa203e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Add O(logn)</mark><ul id="06a671db-cfc8-4ee0-8733-a82f34579010" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Add data to end of array to ensure completeness</mark></li></ul><ul id="2a5639c4-1df9-4d98-abf0-8c2f28d500d0" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Up-Heap</mark> - <mark class="highlight-yellow_background">Heapifying from bottom to top</mark></li></ul></li></ul><ul id="ed9424fb-1549-4d0a-994a-88e4974ceb7f" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Remove O(logn)</mark><ul id="6904ded4-e998-4dd0-8393-b32fb6b5d553" class="bulleted-list"><li style="list-style-type:circle">Remove data at beginning of array (root)</li></ul><ul id="89f46319-2083-4fe9-bc51-177643b9a3c0" class="bulleted-list"><li style="list-style-type:circle">Copy last data to root</li></ul><ul id="fc259b91-34c5-4890-acb9-db75b868eae5" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Down-Heap</mark> - <mark class="highlight-yellow_background">Heapifying from top to bottom by finding highest priority child to swap with</mark></li></ul></li></ul><ul id="04e3de33-167a-4cda-b809-7183f3fe37a7" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Build Heap O(n)</mark><ul id="3a47d0bb-b745-4b50-8d32-95f76f849ebc" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Call down-heap on each sub-heap, starting at index size/2 (parent of rightmost leaf)</mark><ul id="33d357cb-72c2-41ee-8472-8d700c43674d" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Climb upwards by one index and call down-heap on farther up sub-heaps containing other subheaps</mark></li></ul></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">HashMaps</summary><div class="indented"><ul id="22e35906-ed50-4c75-96bd-1118d849cbb3" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Maps</mark> - <mark class="highlight-yellow_background">Collections</mark> that are<mark class="highlight-yellow_background"> key-value paired, searchable, and unordered</mark><ul id="0a7f5258-b5ef-4781-81f5-48014a313833" class="bulleted-list"><li style="list-style-type:circle">Keys are unique</li></ul><ul id="fb22d0de-af20-467e-9207-d310001379f1" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Put</mark> - <mark class="highlight-yellow_background">Adds key and value to map</mark></li></ul></li></ul><ul id="8e779ff9-f0a2-49d4-a218-c20735053f88" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Hash-Map</mark> - A map where the<mark class="highlight-yellow_background"> key is hashed to represent its array index</mark><ul id="a920dde1-63a4-4651-8fb9-6c769078b6ce" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Hashing</mark> - Converting object to integer where:<ul id="c1e079c1-4d50-4638-b497-d7a6d67c8d78" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">If two objects are equal, their hashcode is also equal</mark></li></ul><ul id="abdb5ff3-365a-4035-a354-455cf07bdc2e" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Not necessarily vice versa</mark></li></ul><ul id="5a246be5-0d88-4566-b00e-01919683b58c" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Designed to avoid collisions</mark></li></ul></li></ul></li></ul><ul id="c236d9fc-54f4-4255-8db8-dce720959c0b" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Collisions</mark> - <mark class="highlight-yellow_background">When two values will be assigned the same key</mark></li></ul><ul id="177e4d99-e202-4c57-be81-0b76b61a09ff" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Collision Avoidance</mark><ul id="2dbfd788-9158-4b1f-ab6f-9cafd8232cd4" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Resize</mark><figure id="2bca987d-dcf4-4c65-8221-7ff7c7140917" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>capacity</mtext><mo>=</mo><mtext>capacity</mtext><mo>×</mo><mn>2</mn><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\text{capacity} = \text{capacity} \times 2 + 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8623em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">capacity</span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8623em;vertical-align:-0.1944em;"></span><span class="mord text"><span class="mord">capacity</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></span></div></figure><ul id="b0f0e817-f985-4de8-a37e-2aa1759c593d" class="bulleted-list"><li style="list-style-type:square">Re-assign key-value locations</li></ul></li></ul><ul id="da0fc91d-0ca1-43c5-91a4-d10d5f06b9a8" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Maximum Load Factor</mark><mark class="highlight-default"> - </mark><mark class="highlight-yellow_background">Determines when you resize</mark><figure id="2c9c1818-ac2a-46af-87a8-c87e40b1b048" class="equation"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo>=</mo><mtext>size</mtext><mi mathvariant="normal">/</mi><mtext>capacity</mtext></mrow><annotation encoding="application/x-tex">= \text{size} / \text{capacity}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">size</span></span><span class="mord">/</span><span class="mord text"><span class="mord">capacity</span></span></span></span></span></span></div></figure></li></ul><ul id="6679efab-24ba-4c09-88d1-1e9625953d13" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Typical Max Load Factor = 3/5</mark></li></ul></li></ul><ul id="64662a57-10ec-47d1-9bf0-38ce45641a61" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Closed Addressing</mark> - <mark class="highlight-yellow_background">Multiple values per key</mark><ul id="cf71cdcf-ea7f-46d2-8feb-45cdaa8316c2" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">External Chaining</mark> - <mark class="highlight-yellow_background">Having a BST at each index</mark><ul id="3e163f7c-a0e8-467b-bc72-9175c7c18bbb" class="bulleted-list"><li style="list-style-type:square">No duplicate keys</li></ul></li></ul></li></ul><ul id="662c2878-6376-454f-85ee-b3543a8fad39" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Open Addressing</mark> - <mark class="highlight-yellow_background">One value per key</mark><ul id="35361f56-2c16-4e78-8285-05cccb7a3d03" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Soft Remove</mark> - <mark class="highlight-yellow_background">When removing put in DEL marker</mark><ul id="19e0119e-560a-4f05-a1c4-b507e19ef868" class="bulleted-list"><li style="list-style-type:square">Do not include on resize</li></ul></li></ul><ul id="317fb02c-4379-4626-a818-43a66c7f4c79" class="bulleted-list"><li style="list-style-type:circle">General Probing<ul id="757fa78e-c1de-43d6-95bf-90527ec9b99b" class="bulleted-list"><li style="list-style-type:square">When getting, probe to see when next occurrence is<ul id="bde4a51d-af9e-4ed2-a67a-787d33b210f7" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Stop when hitting null/del</mark></li></ul></li></ul><ul id="e370dec6-d24b-4040-92e5-a58038f80986" class="bulleted-list"><li style="list-style-type:square">When putting, <mark class="highlight-yellow_background">in priority order, put in desired spot, replace existing, in del marker, or null</mark></li></ul></li></ul><ul id="222262c0-71e2-43ba-8473-95ecb7619a3d" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Linear Probing </mark>- <mark class="highlight-yellow_background">Upon collision look for empty slot by incrementing index</mark><ul id="feaf16d1-9704-48fc-8128-de2dc7c326f4" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-teal_background">Primary Clustering/Turtling</mark> - <mark class="highlight-yellow_background">Continuous blocks of data, which causes inefficiencies</mark></li></ul><ul id="e68cfbe1-6cff-4807-9a83-9df9198d835d" class="bulleted-list"><li style="list-style-type:square">Stop on reaching n-blocks</li></ul></li></ul><ul id="f5aa39f3-33e1-4106-943e-c6dddbbb12f6" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Quadratic Probing</mark> - <mark class="highlight-yellow_background">Upon collision look for empty slot by incrementing by natural numbers squared</mark><ul id="6160e6c4-00c5-48c2-80ae-d98f5adfe6a7" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-teal_background">Secondary Clustering</mark> - <mark class="highlight-yellow_background">Different keys collide in quadratic steps</mark></li></ul><ul id="5fd297da-bef2-4981-8dae-5d26399fc387" class="bulleted-list"><li style="list-style-type:square">To avoid <mark class="highlight-teal_background">infinite probing</mark>, resize upon probing n-times</li></ul></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">SkipLists</summary><div class="indented"><figure id="809dab3c-79b3-4261-9b61-d2737f1e0880" class="image"><a href="CS%201332%20-%20Data%20Structures%20and%20Algorithms%2018554e15a7b4428897a2e965eb657b9f/Untitled%201.png"><img style="width:400px" src="CS%201332%20-%20Data%20Structures%20and%20Algorithms%2018554e15a7b4428897a2e965eb657b9f/Untitled%201.png"/></a></figure><ul id="d4ad4e71-172f-4134-8317-5f3d84cd3aa2" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">SkipList</mark> - <mark class="highlight-yellow_background">A sorted LinkedList where each node has a pointer that points to nodes ahead and to itself on another layer</mark><ul id="561ccef8-d220-4e73-819b-c3686b8cfe87" class="bulleted-list"><li style="list-style-type:circle">Starts with -<style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\infin</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord">∞</span></span></span></span></span><span>﻿</span></span> and ends with <style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\infin</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord">∞</span></span></span></span></span><span>﻿</span></span></li></ul></li></ul><ul id="34dae6c9-8d15-413e-8c1e-1b9f7cd2193b" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Contains O(logn)</mark><ul id="f34e01cd-2164-4ccf-bfb1-6242ab80a222" class="bulleted-list"><li style="list-style-type:circle">See if data is less than farthest node, if yes then jump down to look at closer nodes</li></ul><ul id="1ffa11c2-0b2c-4468-933f-59ad1e5dd4a3" class="bulleted-list"><li style="list-style-type:circle">If not, jump to that node and repeat</li></ul></li></ul><ul id="1f8976c6-4667-4a11-a5b5-93549bb31407" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Add O(logn)</mark><ul id="3a4e3035-a2cb-4a78-8293-36b2e8e82d7e" class="bulleted-list"><li style="list-style-type:circle">Find add spot through contains</li></ul><ul id="4b3ed25d-3c08-44d9-b6b7-dfeee0740d7e" class="bulleted-list"><li style="list-style-type:circle">Add to bottom and add levels depending on number of heads flipped</li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">AVL</summary><div class="indented"><ul id="1cc55aac-4674-44e3-af1b-bf1bb198dfe5" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">AVL</mark> - <mark class="highlight-yellow_background">A binary tree that is forced to be balanced</mark><ul id="552b72de-d043-45d3-9858-1d82eaac8a99" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background">Balance Factor</mark> - <mark class="highlight-yellow_background">The height of left node - height of right node</mark><ul id="a878644f-d845-4376-90e0-a043ca1a9d56" class="bulleted-list"><li style="list-style-type:square">Node is <mark class="highlight-yellow_background">unbalanced</mark> if <mark class="highlight-yellow_background">balance factor is not -1,0,1</mark></li></ul></li></ul></li></ul><ul id="65d5c1d3-42ee-4f01-9764-fc96a5473aef" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Single (Left/Right) Rotation</mark> - <mark class="highlight-yellow_background">Make one of the child nodes parents of unbalanced node</mark><ul id="07b659f2-565d-40b2-80b6-912a07bcd884" class="bulleted-list"><li style="list-style-type:circle">Have current node’s empty pointer adopt child of rotated child</li></ul><ul id="1f98f4d2-4a9a-4165-86c8-b7e137c26e81" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Multiples rotations may be needed if left rotation and the swapped node is left-heavy</mark> and vice versa<ul id="77d7ec99-0d49-4268-852d-5deb5cd97504" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Rotate subtree first</mark></li></ul></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">2-4 Trees</summary><div class="indented"><ul id="711ed5e6-c0a2-483c-a280-ebbb84bbc2ef" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">2-4 Tree</mark> - <mark class="highlight-yellow_background">A tree where a node can have 1-3 data points in sorted order</mark><ul id="f9a9f6c5-bcb4-4f42-978e-ffa8d723af32" class="bulleted-list"><li style="list-style-type:circle">Number of <mark class="highlight-yellow_background">children must be data + 1</mark></li></ul><ul id="edbd736e-f4a0-4095-a134-2dac314afb15" class="bulleted-list"><li style="list-style-type:circle">Data must be sorted in <mark class="highlight-yellow_background">ascending order counting the children</mark></li></ul><ul id="af807e90-b235-494a-ba6b-e7f0b6050961" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">All leaves must have same depth</mark><ul id="3ac17b4c-d931-4a7c-909b-319a8c84edac" class="bulleted-list"><li style="list-style-type:square">Guarantees <mark class="highlight-yellow_background">O(logn) for all</mark></li></ul></li></ul></li></ul><ul id="e5994b95-3a3f-471e-bbc9-55482d4416d9" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Add</mark><ul id="686839c2-7212-4f95-a65b-3e1c4ad07def" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Always add to end of leaf</mark></li></ul><ul id="7ed706dd-941d-447c-a04d-01c990388346" class="bulleted-list"><li style="list-style-type:circle">When overflowing, <mark class="highlight-yellow_background">promote second/third data point to parent then split into two nodes</mark><ul id="11731fdd-ca49-4c0e-9b0a-d0bf39c913d0" class="bulleted-list"><li style="list-style-type:square">If parent overflows, also split parent</li></ul></li></ul></li></ul><ul id="53c1872d-8460-412f-b830-c383b7ac00a0" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Remove</mark><ul id="4d76c7df-b711-45bb-ae24-1cee2435f65b" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Case 1: Remove from leaf with multiple data</mark></li></ul><ul id="85d2358e-88ac-477c-8db8-fc433e1a496d" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Case 2: Remove in middle of tree</mark><ul id="392e0526-c57f-478f-8b30-88fb85fd70f1" class="bulleted-list"><li style="list-style-type:square">Use predecessor/successor method (look rightmost/leftmost in node)</li></ul></li></ul><ul id="b8802dea-a7ce-4bf8-a48e-7575c805ca58" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Case 3: Remove from leaf with one data</mark><ul id="31cbd747-08a2-4111-93cd-9d5989275a0a" class="bulleted-list"><li style="list-style-type:square">Pull down from parent and push one from neighboring leaf to parent</li></ul></li></ul><ul id="757b1729-633f-44e8-b283-0ad0146d7ccb" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Case 4: Remove from leaf with one data (other leaves only have one data)</mark><ul id="c3adae51-e2ff-4bb0-9db9-12ad4a950fc8" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-teal_background">Fusion</mark> - Pull down from parent data and merge with neighbor<ul id="5591e28d-a94f-4f25-81db-45f07ae94266" class="bulleted-list"><li style="list-style-type:disc">Fusion can propagate upwards </li></ul></li></ul></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Sorting (Iterative)</summary><div class="indented"><ul id="91b97a1f-e93b-4e19-9a8c-aa2e8ca1a5e2" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Adaptive</mark> - <mark class="highlight-yellow_background">Runs faster if data is partially sorted</mark></li></ul><ul id="e40b3b7d-063b-433f-b2dc-5b0cf8841a8e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">Stable</mark> - <mark class="highlight-yellow_background">Elements of equal value keep their order before/after</mark><ul id="3b388c20-3ef5-462b-b171-8085264ab2b1" class="bulleted-list"><li style="list-style-type:circle">Can run multiple sorts</li></ul></li></ul><ul id="bd155c68-fe19-47ce-a343-4a4fab1609d4" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">In-Place</mark> - <mark class="highlight-yellow_background">Uses less than O(n) additional memory</mark></li></ul><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Bubble Sort</summary><div class="indented"><ul id="4c4d429b-883f-4d2e-a9f1-fe3732dd96c5" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Bubble Sort</mark> - <mark class="highlight-yellow_background">Iterate through data and swap pairs if out of order and repeat till sorted</mark><ul id="8eb74ba7-8161-4330-adfd-9f18d48c15f1" class="bulleted-list"><li style="list-style-type:circle">After first iteration, largest is always last, etc.</li></ul><ul id="ce259c6d-ce6f-4551-b687-f8fc9f622168" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">After each iteration, stop before completely sorted segment </mark></li></ul><ul id="a49f6c2c-4e04-48a3-af86-b62de35db7f3" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Ω</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Omega(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-teal_background">, </mark><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\theta(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-teal_background">, </mark><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>O</mtext><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{O}(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">O</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><ul id="20947b44-ff1f-42bc-becb-14e38fdba4c1" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Worst case when reverse sorted</mark></li></ul></li></ul><ul id="8f04903a-a16b-4d76-ac83-3d9dbaf5c16e" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Adaptive, Stable, In-place</mark></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Insertion Sort</summary><div class="indented"><ul id="35aaa30f-e71b-4563-b679-6164517bb380" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Insertion Sort</mark> - <mark class="highlight-yellow_background">Iterate through data and place current data in previously sorted segment</mark><ul id="05db41f1-0827-4d0b-a15e-847d6b52c6b6" class="bulleted-list"><li style="list-style-type:circle">Stability: insert duplicate afterwards</li></ul><ul id="74b087d2-32e3-4c57-9de7-79e82de2041d" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Ω</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Omega(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-teal_background">, </mark><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\theta(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-teal_background">, </mark><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>O</mtext><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{O}(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">O</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><ul id="13165669-fd1c-478c-9199-eec1de70b949" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Worst case when reverse sorted</mark></li></ul></li></ul><ul id="47263c4b-a76d-4db1-88b7-53bd0670225e" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Adaptive, Stable, In-place</mark></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Selection Sort</summary><div class="indented"><ul id="ae5fc0a2-18a3-4a04-ac51-da664d343e85" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Selection Sort</mark> - <mark class="highlight-yellow_background">Iterate through data and place current max at end of non-sorted segment</mark><ul id="abc75191-ab58-4033-9548-409fb5ed32f9" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Ω</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Omega(n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-teal_background">, </mark><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\theta(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-teal_background">, </mark><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>O</mtext><mo stretchy="false">(</mo><msup><mi>n</mi><mn>2</mn></msup><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{O}(n^2)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">O</span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><ul id="6ce31a34-9a80-47be-a931-824af02ec39b" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Worst case when reverse sorted</mark></li></ul></li></ul><ul id="ccebc28e-1dbb-40db-8896-47f1344ebd20" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">In-place</mark></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">CocktailShaker Sort</summary><div class="indented"><ul id="707cbd23-e6e9-4594-8f00-1e6ecfbc6691" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">CocktailShaker Sort</mark> - <mark class="highlight-yellow_background">Run Bubble Sort from both ends, swapping at the same time</mark></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">MergeSort</summary><div class="indented"><ul id="c8a967b8-ea12-46d8-9262-8cca7ba6aac6" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Merge Sort</mark> - <mark class="highlight-yellow_background">Break down array into arrays of length 1 then recursively combine them while keeping them sorted</mark><ul id="5796c696-845c-4b16-9a87-1bc4152e0b74" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Ω</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Omega(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-teal_background">, </mark><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\theta(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-teal_background">, </mark><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>O</mtext><mo stretchy="false">(</mo><mi>n</mi><mi>l</mi><mi>o</mi><mi>g</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{O}(nlogn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">O</span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark></li></ul><ul id="b974fc85-8621-48b9-8e49-7d0c6585c3ed" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Stable</mark></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">QuickSort</summary><div class="indented"><ul id="e0b3586e-4eee-40e9-b9c4-bd521cd79f53" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">QuickSort</mark> - <mark class="highlight-yellow_background">Given a pivot, place an element to the right/left of the pivot then recursively call on subarray</mark><ul id="44423406-0814-4a25-ae1a-cdf510e6471d" class="bulleted-list"><li style="list-style-type:circle">Move pivot to the and create front and end pointer (left and right)</li></ul><ul id="aac6efa2-bac1-41e7-8c7d-ff1417c168a3" class="bulleted-list"><li style="list-style-type:circle">Swap so that left side is less than right (increment/decrement depending on swap)</li></ul></li></ul><ul id="cc0b09df-192c-4103-be8d-227894ce7e23" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">In-Place</mark></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Radix Sort</summary><div class="indented"><ul id="f6bd6301-ceca-4634-bed8-04878c94693f" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Radix Sort</mark> - <mark class="highlight-yellow_background">Create buckets (queues) for current digit and place numbers in it to sort by that digit (least significant first) then dump them in order</mark><ul id="b03d2bea-9c0f-4edb-aa0c-cb797037e11e" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Ω</mi><mo stretchy="false">(</mo><mi>k</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\Omega(kn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord mathnormal">kn</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-teal_background">, </mark><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>θ</mi><mo stretchy="false">(</mo><mi>k</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\theta(kn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mopen">(</span><span class="mord mathnormal">kn</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><mark class="highlight-teal_background">, </mark><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>O</mtext><mo stretchy="false">(</mo><mi>k</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{O}(kn)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">O</span></span><span class="mopen">(</span><span class="mord mathnormal">kn</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark></li></ul><ul id="3ec6def6-507b-49ec-bfc1-3672bad31d0d" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Stable</mark></li></ul></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Heap Sort</summary><div class="indented"><ul id="11aaf2cd-250d-468b-bade-e0ccea5eab62" class="bulleted-list"><li style="list-style-type:disc"></li></ul></div></details></div></details><details open=""><summary style="font-weight:600;font-size:1.875em;line-height:1.3;margin:0">Pattern Matching</summary><div class="indented"><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Brute Force</summary><div class="indented"><ul id="244f28bb-cbd4-45ed-a805-85448686e726" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Starting at start of both strings</mark>, i<mark class="highlight-yellow_background">ncrement through both to check if they have same character</mark><ul id="b2a81fce-d2c5-40d5-a4b7-0130493534cc" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">If not, move pattern up one</mark></li></ul></li></ul><ul id="4b7dc08e-6472-4322-98c6-975e2fd04f6e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background">O(mn)</mark></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Boyer-Moore</summary><div class="indented"><ul id="d55f5f28-8f59-4dc5-80ff-e5ddcd35eaaa" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Last Occurrence Table</mark><ul id="6f47d92c-c123-45b8-b180-525bc494922f" class="bulleted-list"><li style="list-style-type:circle">Create <mark class="highlight-yellow_background">HashMap</mark> containing <mark class="highlight-yellow_background">each letter as a key</mark> and the <mark class="highlight-yellow_background">index of last occurrence as value</mark></li></ul></li></ul><ul id="c79564a4-1b5d-4c71-9bcf-415f57ab7a99" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Search Algorithm</mark><ul id="ef3e7e55-9f70-4ec1-8627-13b69851234a" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Align starts and start from back of pattern to check</mark></li></ul><ul id="3e3a8c91-bf46-4111-ab64-d7bafbedd1fc" class="bulleted-list"><li style="list-style-type:circle">3 cases when conflict<ul id="5ca0b474-99fa-4bdd-8b51-57c3ab76b07c" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Not in table</mark><ul id="f5d70939-22aa-43f3-ba30-1af5b506c4b7" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Move string all the way past current end index</mark></li></ul></li></ul><ul id="1a8356a2-6d93-4629-b236-fa638a26183d" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Last occurrence of text character not encountered yet</mark><ul id="4ddd5de2-3b61-40e3-8939-9606386c955c" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Shift to match the index of the two characters</mark></li></ul></li></ul><ul id="a5eb89ba-2da4-48f9-8181-ff946b118041" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Last occurrence of text character encountered</mark><ul id="dc8ff767-d36b-47cb-a486-67c02a5683df" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Shift by one</mark></li></ul></li></ul></li></ul><ul id="1d42f749-aedf-4b80-80e3-0b09aec812db" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">When conflict, restart from back of pattern</mark></li></ul></li></ul><ul id="dc9a9032-127d-48bd-a0d0-cb354295c7e6" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>O</mtext><mo stretchy="false">(</mo><mi>m</mi><mi>n</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi mathvariant="normal">Ω</mi><mo stretchy="false">(</mo><mi>m</mi><mo>+</mo><mi>m</mi><mi mathvariant="normal">/</mi><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{O}(mn),\Omega(m + m/n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">O</span></span><span class="mopen">(</span><span class="mord mathnormal">mn</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">m</span><span class="mord">/</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">KMP</summary><div class="indented"><ul id="d16e1daa-0409-4b52-ba94-53f547bc1bf9" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Failure Table</mark><ul id="337ec379-bdc7-45a8-9c4c-41d97c90c0d0" class="bulleted-list"><li style="list-style-type:circle">Generate <mark class="highlight-yellow_background">array of integers</mark> of length of pattern</li></ul><ul id="3788681d-f5ab-43cf-8150-67cc590dd729" class="bulleted-list"><li style="list-style-type:circle">Value at index is the <mark class="highlight-yellow_background">length of substring that is a proper prefix as well as a proper suffix </mark></li></ul></li></ul><ul id="607de208-9d4c-49c1-859a-68c2ab77a181" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Search Algorithm</mark><ul id="434d609d-805e-4993-bf45-be7de082f411" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Align starts and start from start of pattern to check</mark></li></ul><ul id="1a722498-ed2e-404b-9a8a-e82cae5f4e39" class="bulleted-list"><li style="list-style-type:circle">2 cases when conflict<ul id="1848266e-cea5-4e0b-89d2-31a3b01bcfee" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Start of pattern</mark><ul id="bfa30718-2eaf-4c76-84b2-e55cecadd28a" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Shift pattern forward one</mark></li></ul></li></ul><ul id="9c947cd5-a98f-446d-8449-36521f1029f1" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Middle of pattern</mark><ul id="3d95cc2b-16ae-40cb-858b-5074b73651ff" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-yellow_background">Shift pattern to end of previous prefix defined in the failure table so that the start is aligned</mark></li></ul></li></ul></li></ul><ul id="1a29a6bf-eec5-44cf-b410-f5e5afecf4c3" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">When finding occurrence, jump over match</mark></li></ul></li></ul><ul id="10b0124b-f82d-49ae-b109-abc47c7ad299" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>O</mtext><mo stretchy="false">(</mo><mi>m</mi><mo>+</mo><mi>n</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi mathvariant="normal">Ω</mi><mo stretchy="false">(</mo><mi>m</mi><mo>+</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{O}(m + n), \Omega(m + n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">O</span></span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark></li></ul></div></details><details open=""><summary style="font-weight:600;font-size:1.5em;line-height:1.3;margin:0">Rabin-Karp</summary><div class="indented"><ul id="af5e8227-8464-4c58-97a7-c5ec1ccc72ad" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">String Hashing</mark><ul id="d4652839-ccbf-4b4a-84e8-00761073d150" class="bulleted-list"><li style="list-style-type:circle"><code><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo stretchy="false">(</mo><mi>s</mi><mi>t</mi><mi>r</mi><mo stretchy="false">)</mo><mo>=</mo><mi>s</mi><mi>t</mi><mi>r</mi><mo stretchy="false">[</mo><mn>0</mn><mo stretchy="false">]</mo><mo>∗</mo><mi>B</mi><mi>A</mi><mi>S</mi><msup><mi>E</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>+</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo>+</mo><mi>s</mi><mi>t</mi><mi>r</mi><mo stretchy="false">[</mo><mi>m</mi><mo>−</mo><mn>2</mn><mo stretchy="false">]</mo><mo>∗</mo><mi>B</mi><mi>A</mi><mi>S</mi><msup><mi>E</mi><mn>1</mn></msup><mo>+</mo><mi>s</mi><mi>t</mi><mi>r</mi><mo stretchy="false">[</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo stretchy="false">]</mo><mo>∗</mo><mi>B</mi><mi>A</mi><mi>S</mi><msup><mi>E</mi><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">H(str) = str[0]*BASE^{m-1}+...+str[m-2]*BASE^{1}+str[m-1]*BASE^{0}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">[</span><span class="mord">0</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord">...</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">[</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">[</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span></span></span><span>﻿</span></span></code></li></ul></li></ul><ul id="4c072c32-f036-4aee-8d7c-f9e3013643d2" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Rolling/Updating Hash</mark><ul id="d54bff98-5d21-45a4-bf43-4e7ee3f04aad" class="bulleted-list"><li style="list-style-type:circle"><code><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>H</mi><mo stretchy="false">(</mo><mi>s</mi><mi>t</mi><mi>r</mi><mo stretchy="false">)</mo><mo>−</mo><mi>s</mi><mi>t</mi><mi>r</mi><mo stretchy="false">[</mo><mi>o</mi><mi>l</mi><mi>d</mi><mo stretchy="false">]</mo><mo>∗</mo><mi>B</mi><mi>A</mi><mi>S</mi><msup><mi>E</mi><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo><mo>∗</mo><mi>B</mi><mi>A</mi><mi>S</mi><mi>E</mi><mo>+</mo><mi>s</mi><mi>t</mi><mi>r</mi><mo stretchy="false">[</mo><mi>n</mi><mi>e</mi><mi>w</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">(H(str)-str[old]*BASE^{m-1})*BASE + str[new]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">[</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">d</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05764em;">E</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">m</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.05764em;">SE</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mopen">[</span><span class="mord mathnormal">n</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="mclose">]</span></span></span></span></span><span>﻿</span></span></code></li></ul></li></ul><ul id="09cc2f58-32f7-4405-b2c9-3ece310dea62" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-blue_background">Search Algorithm</mark><ul id="cf99f164-5834-485b-9e78-35103e119a6e" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-yellow_background">Iterate through string and compare hashes</mark><ul id="5c656efd-81b5-48dc-91d7-0a4e88421a3b" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">If same hash, then compare string</mark></li></ul><ul id="b21fb911-3369-468f-bd40-89eff55d320c" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-yellow_background">Else, update hash and iterate</mark></li></ul></li></ul></li></ul><ul id="a607685f-ae7e-4fac-9c69-b0ffa4257534" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal_background"><style>@import url('https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css')</style><span data-token-index="0" contenteditable="false" class="notion-text-equation-token" style="user-select:all;-webkit-user-select:all;-moz-user-select:all"><span></span><span><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>O</mtext><mo stretchy="false">(</mo><mi>m</mi><mi>n</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>θ</mi><mo stretchy="false">(</mo><mi>m</mi><mo>+</mo><mi>n</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi mathvariant="normal">Ω</mi><mo stretchy="false">(</mo><mi>m</mi><mo>+</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\text{O}(mn),\theta(m+n),\Omega(m+n)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord text"><span class="mord">O</span></span><span class="mopen">(</span><span class="mord mathnormal">mn</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">Ω</span><span class="mopen">(</span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></span><span>﻿</span></span></mark><ul id="c16d34f7-a572-45b8-a5b6-d2335aaa0b4c" class="bulleted-list"><li style="list-style-type:circle">Big O is because of hash collisions</li></ul></li></ul></div></details></div></details><p id="266bedc3-6c29-4048-becf-e6fa1bba37c5" class="">
+</p><p id="62b135a9-93db-4825-ac44-79ec9922622b" class="">
+</p><p id="33bfa5f4-407b-4b50-9694-e65a06b15e65" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
