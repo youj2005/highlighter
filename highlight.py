@@ -8,7 +8,6 @@ class HighlightHead(nn.Module):
       self,
       outdim: int,
       hidden_size: int, 
-      kernel_size: int,
       model_name: str = 'bert-base-cased'
     ):
         super().__init__()
